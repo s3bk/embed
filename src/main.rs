@@ -1,15 +1,15 @@
 
 extern "C" {
     static _binary_EMBEDDED_DATA_start: u8;
-    static _binary_EMBEDDED_DATA_size: ();
+    static _binary_EMBEDDED_DATA_end: u8;
 }
 
 fn embedded_data() -> &'static [u8] {
     unsafe {
-        std::slice::from_raw_parts(
-            &_binary_EMBEDDED_DATA_start,
-            (&_binary_EMBEDDED_DATA_size) as *const () as usize
-        )
+        let start_ptr = (&_binary_EMBEDDED_DATA_start) as *const u8;
+        let end_ptr = (&_binary_EMBEDDED_DATA_end) as *const u8;
+        let len = end_ptr as usize - start_ptr as usize;
+        std::slice::from_raw_parts(start_ptr, len)
     }
 }
 
