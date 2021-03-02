@@ -28,6 +28,6 @@ fn main() {
         .output()
         .unwrap();
 
-    println!("rustc-link-search=native={}", out.to_str().unwrap());
-    println!("rustc-link-lib=static=EMBEDDED_DATA.a");
+    println!("cargo:rustc-link-search=native={}", out.to_str().unwrap());
+    println!("cargo:rustc-link-lib=static=EMBEDDED_DATA");
 }
